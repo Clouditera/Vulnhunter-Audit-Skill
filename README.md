@@ -15,9 +15,6 @@ skills/
 agents/
   onboard.md research.md build.md hunt.md verify.md   角色 agent 定义（skills/tools/model）
 commands/audit.md             /audit 入口命令
-engine/
-  tasks/                      原引擎任务书（参照）
-  assets/AGENTS.md            原引擎共享纪律
 ```
 
 ## 角色与技能挂载
