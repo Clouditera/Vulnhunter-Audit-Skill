@@ -1,5 +1,7 @@
 # vulnhunter-skill
 
+原引擎仓库：https://github.com/Clouditera/VulnHunter-engine
+
 白盒代码审计的 zcode skill：主会话负责交互确认与调度，subagent 分工执行 onboard / research / build / hunt / verify。
 
 ## 组成
