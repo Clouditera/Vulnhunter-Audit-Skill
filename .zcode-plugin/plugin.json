@@ -1,0 +1,9 @@
+{
+  "name": "vulnhunter-audit",
+  "version": "0.1.0",
+  "description": "VulnHunter 白盒审计：主会话交互与调度 + 按角色挂载技能的 subagent 执行",
+  "license": "Apache-2.0",
+  "skills": "./skills",
+  "commands": "./commands",
+  "agents": "./agents"
+}

@@ -1,3 +1,8 @@
+---
+name: hunt
+description: 主审计：沿攻击面生成结构化 HYP 到 hyps.jsonl，并维护 coverage.md 覆盖台账
+---
+
 # hunt 任务书（单轮）
 
 系统性精读**本轮指定的一个功能点**，找出值得复核的风险假设（HYP）。

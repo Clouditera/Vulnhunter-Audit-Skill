@@ -1,3 +1,8 @@
+---
+name: research
+description: 技术研究与威胁建模：基于项目画像产出技术档案、威胁模型与 security.md 排除条款
+---
+
 # research 任务书
 
 调研项目弱点与项目安全说明，形成找漏洞的口径。

@@ -1,3 +1,8 @@
+---
+name: verify
+description: HYP 研判：主动证伪或确认，confirmed 产出 findings 报告与 CVSS/CWE
+---
+
 # verify 任务书（单条 HYP 复核）
 
 对主会话给的一条 HYP 做独立复核，**主动证伪优先**。

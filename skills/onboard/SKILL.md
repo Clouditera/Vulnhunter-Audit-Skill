@@ -1,3 +1,8 @@
+---
+name: onboard
+description: 项目画像与入口发现：对目标仓库做结构化勘测，产出 overview/structure/entry_points 知识
+---
+
 # onboard 任务书
 
 了解项目基本情况，产出项目画像，供后续审计使用。

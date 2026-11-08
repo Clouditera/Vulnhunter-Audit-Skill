@@ -30,14 +30,36 @@ description: 白盒代码审计（主会话调度版）。用户要求对项目�
 ## 第三步：分派与循环
 
 **顺序**：
-1. 派 `onboard` subagent（fresh，读 references/onboard.md 的任务书）
-2. 派 `research` subagent（fresh，读 references/research.md 的任务书；产出 knowledge/security.md）
-3. 动态模式才派 `build` subagent（读 references/build.md；产出 build/env.md）
-4. **hunt 循环**：每轮派一个 `hunt` subagent（fresh；读 references/hunt.md 的任务书 + 给它指定本轮的功能点）。它读完会追加 hyps.jsonl 并更新 coverage.md。停轮由**你**判断：
+1. 派 `onboard` subagent（fresh）
+2. 派 `research` subagent（fresh；产出 knowledge/security.md）
+3. 动态模式才派 `build` subagent（产出 build/env.md）
+4. **hunt 循环**：每轮派一个 `hunt` subagent（fresh；给它指定本轮的功能点）。它读完会追加 hyps.jsonl 并更新 coverage.md。停轮由**你**判断：
    - **完成**：coverage.md 显示范围内已读完（未读清单为空）
    - **收场**：连续 2-3 轮无新发现且无明显未读区域——在台账里如实标记「未达标收场」，不要硬凑
-5. **verify**：对每条 `new/running` 的 HYP 派一个 `verify` subagent（读 references/verify.md 的任务书 + 该条 HYP 原文；可用 fork 继承对应 hunt 会话上下文）。复核三态：confirmed（写 findings/<ID>/report.md 并回写状态）/ refuted / 证据不足保留待查
+5. **verify**：对每条 `new/running` 的 HYP 派一个 `verify` subagent（给它该条 HYP 原文；可用 fork 继承对应 hunt 会话上下文）。复核三态：confirmed（写 findings/<ID>/report.md 并回写状态）/ refuted / 证据不足保留待查
 6. **完成条件**：coverage.md 未读清单为空 **且** hyps.jsonl 里没有 new/running。二者缺一就不能宣称完成
+
+**按角色派发对应的 agent 类型**（本插件已预定义，各自只挂载自己任务相关的技能）：
+
+| 角色 | agent 类型 | 挂载技能 |
+|---|---|---|
+| onboard | `onboard` | onboard + project-profiler + wiki-maintainer |
+| research | `research` | research + threat-modeling + wiki-maintainer |
+| build | `build` | build + project-profiler |
+| hunt | `hunt` | hunt + threat-modeling + wiki-maintainer |
+| verify | `verify` | verify + bug-report + wiki-maintainer |
+
+派发格式：
+
+```
+Agent tool:
+  subagent_type: {onboard|research|build|hunt|verify}
+  prompt: |
+    项目根：{cwd}，工作区：{cwd}/.vulnforge/。
+    按你挂载的 {角色} 任务书工作。
+    完成后汇报：产物路径、关键结论。
+    {本轮的具体上下文}
+```
 
 ## coverage.md 台账格式（结构化，别写散文）
 

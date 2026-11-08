@@ -2,16 +2,40 @@
 
 原引擎仓库：https://github.com/Clouditera/VulnHunter-engine
 
-白盒代码审计的 zcode skill：主会话负责交互确认与调度，subagent 分工执行 onboard / research / build / hunt / verify。
+VulnHunter 白盒代码审计的 **zcode 插件**：主会话负责交互确认与调度，subagent 按角色执行；每个 subagent 只挂载自己任务相关的技能。
 
-## 组成
-- `.agents/skills/audit-lite/SKILL.md`：主会话调度规则（交互四问、audit_scope、调度循环、coverage.md 台账格式、纪律红线）
-- `references/`：五本 subagent 任务书（onboard / research / build / hunt / verify）
+## 结构
+
+```
+.zcode-plugin/plugin.json     插件清单
+skills/
+  audit-lite/                 主会话调度规则（交互四问、派发循环、coverage.md 台账、纪律红线）
+  onboard/ research/ build/ hunt/ verify/   五本任务书（各自独立技能）
+  project-profiler/ threat-modeling/ wiki-maintainer/ bug-report/   原引擎技能（随角色挂载）
+agents/
+  onboard.md research.md build.md hunt.md verify.md   角色 agent 定义（skills/tools/model）
+commands/audit.md             /audit 入口命令
+engine/
+  tasks/                      原引擎任务书（参照）
+  assets/AGENTS.md            原引擎共享纪律
+```
+
+## 角色与技能挂载
+
+| 角色 | agent 类型 | 挂载技能 |
+|---|---|---|
+| onboard | `onboard` | onboard + project-profiler + wiki-maintainer |
+| research | `research` | research + threat-modeling + wiki-maintainer |
+| build | `build` | build + project-profiler |
+| hunt | `hunt` | hunt + threat-modeling + wiki-maintainer |
+| verify | `verify` | verify + bug-report + wiki-maintainer |
 
 ## 使用
-把 `.agents/skills/audit-lite/` 放进被测项目根（或其上层工作区），用 zcode CLI 以自然语言发起审计，例如：
+
+用 zcode 链接本插件后，在项目里发起：
 
 ```sh
+zcode plugins link /path/to/vulnhunter-skill
 zcode --prompt '使用 audit-lite 技能对当前项目做白盒安全审计。审计目标：…；审计范围：…；不做动态验证；漏洞关注类型：全部。开始吧。' \
   --cwd /path/to/project --mode yolo --output-format stream-json --no-color
 ```

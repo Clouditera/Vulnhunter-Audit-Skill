@@ -1,3 +1,8 @@
+---
+name: build
+description: 动态环境构建：拉起靶子、探测服务、按步骤复现 PoC，产出 build/env.md
+---
+
 # build 任务书（动态验证环境）
 
 搭建动态验证环境，供 verify 做 PoC 复现。
