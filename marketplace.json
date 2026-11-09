@@ -1,0 +1,22 @@
+{
+  "name": "vulnhunter-skill",
+  "description": "VulnHunter white-box audit plugin marketplace.",
+  "description_i18n": {
+    "en": "VulnHunter white-box audit plugin: main-session orchestration with per-role subagent skills.",
+    "zh-CN": "VulnHunter 白盒审计插件：主会话交互调度，subagent 按角色挂载技能执行。"
+  },
+  "owner": {
+    "name": "Clouditera",
+    "url": "https://github.com/Clouditera"
+  },
+  "plugins": [
+    {
+      "name": "vulnhunter-audit",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "VulnHunter 白盒审计：主会话交互与调度 + 按角色挂载技能的 subagent 执行",
+      "category": "security",
+      "keywords": ["security", "audit", "white-box", "vulnerability"]
+    }
+  ]
+}

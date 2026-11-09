@@ -27,12 +27,32 @@ commands/audit.md             /audit 入口命令
 | hunt | `hunt` | hunt + threat-modeling + wiki-maintainer |
 | verify | `verify` | verify + bug-report + wiki-maintainer |
 
-## 使用
+## 安装
 
-用 zcode 链接本插件后，在项目里发起：
+### 方式一：插件市场（推荐）
+
+仓库根目录带有 `marketplace.json`，可直接作为 zcode 插件市场源：
+
+1. 打开 zcode「插件市场 → 新增」，填入仓库地址 `https://github.com/Clouditera/Vulnhunter-Skill.git`；
+2. 在市场中选择 `vulnhunter-audit` 安装即可。
+
+也可以用命令行添加市场：
+
+```sh
+zcode plugins marketplace add https://github.com/Clouditera/Vulnhunter-Skill.git
+```
+
+### 方式二：本地链接
 
 ```sh
 zcode plugins link /path/to/vulnhunter-skill
+```
+
+## 使用
+
+安装插件后，在项目里发起：
+
+```sh
 zcode --prompt '使用 audit-lite 技能对当前项目做白盒安全审计。审计目标：…；审计范围：…；不做动态验证；漏洞关注类型：全部。开始吧。' \
   --cwd /path/to/project --mode yolo --output-format stream-json --no-color
 ```
